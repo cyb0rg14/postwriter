@@ -61,13 +61,13 @@ if 'topic' in template:
         # display the response
         height = max(200, number_of_words*2)
 
-        # Store response persistently using st.experimental_singleton
+        # Store response persistently using st.cache_resource
         @st.cache_resource
-        def get_response():
+        def get_response(user_inputs):
             response = write_post(user_inputs, groq_api_key)
             return response
 
-        response = get_response()
+        response = get_response(user_inputs)
         st.text_area("Your Post:", value=response, height=height)
 
         # copy to clipboard
