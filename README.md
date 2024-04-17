@@ -7,7 +7,7 @@
 - **Adjust Post Duration**: Customize the lifespan of your post according to your preferences.
 - **Craft Your Topic**: Write about anything that interests you or relates to your project.
 
-**example 1**: I want to showcase my new project `PostWriter` which writes content for your social media within few clicks.
+**example 1**: I want to showcase my new project `PostWriter` which writes content for your social media within few clicks.</br>
 **example 2**: Step by step approach for a newbie to learn Reinforcement Learning in 30 days.
 
 - **Customize Your Predbuilt Draft**: Alternatively, you can also tailor your pre-built draft to better fit your needs.
@@ -25,4 +25,4 @@ You could open an issue at this [repo](https://github.com/cyb0rg14/PostWriter/is
 - 📜 [ArtiFact](https://artifact.streamlit.app)
 - 🦙 [ChatBot](https://chatbotmaven.streamlit.app)
 
-Made with ❤️ by [cyb0rg14](https://github.com/cyb0rg14)
+## Made with ❤️ by [cyb0rg14](https://github.com/cyb0rg14)
