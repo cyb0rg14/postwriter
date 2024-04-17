@@ -70,14 +70,7 @@ if 'topic' in template:
 
         response = get_response(user_inputs)
         st.text_area("Your Post:", value=response, height=height)
-
-        # copy to clipboard
-        if st.button("copy to clipboard"):
-            copy(response)
-            success_placeholder = st.empty()
-            success_placeholder.success("Post copied to clipboard successfully!")
-            time.sleep(2)  # Display the success message for 2 seconds
-            success_placeholder.empty()  # Clear the success message
+    
 
 elif 'draft' in template: 
     text_input = st.text_area("Enter the draft to customize:", placeholder=draft_template)
@@ -103,12 +96,3 @@ elif 'draft' in template:
 
         response = get_response(user_inputs)
         st.text_area("Your Post:", value=response, height=height)
-
-        # copy to clipboard
-        if st.button("copy to clipboard"):
-            copy(response)
-            success_placeholder = st.empty()
-            success_placeholder.success("Post copied to clipboard successfully!")
-            time.sleep(2)  # Display the success message for 2 seconds
-            success_placeholder.empty()  # Clear the success message
-
