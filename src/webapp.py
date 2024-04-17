@@ -1,5 +1,6 @@
 # import all the required packages
 import streamlit as st
+from pyperclip import copy
 from sidebar import sidebar_conf
 from writer import write_post
 from constants import *
@@ -44,21 +45,52 @@ template = st.selectbox(
     templates
 )
 
-if 'title' in template:
-    title = st.text_input("Enter the title:", placeholder=title_template)
+if 'topic' in template:
+    text_input = st.text_input("Enter the title of your post:", placeholder=title_template)
+    if text_input:
+        user_inputs = {
+            "social_media": social_media,
+            "number_of_words": number_of_words,
+            "tone": tone,
+            "topic": text_input
+        }
+
+        # get the response
+        groq_api_key = st.secrets["groq_api_key"]
+
+        # display the response
+        height = max(200, number_of_words*2)
+
+        # Store response persistently using st.experimental_singleton
+        @st.cache_resource
+        def get_response():
+            response = write_post(user_inputs, groq_api_key)
+            return response
+
+        response = get_response()
+        st.text_area("Your Post:", value=response, height=height)
+
+        # copy to clipboard
+        if st.button("copy to clipboard"):
+            copy(response)
+
 elif 'draft' in template: 
-    text_input = st.text_area("Enter the Draft:", placeholder=draft_template)
+    text_input = st.text_area("Enter the draft to customize:", placeholder=draft_template)
+    if text_input:
+        user_inputs = {
+            "social_media": social_media,
+            "number_of_words": number_of_words,
+            "tone": tone,
+            "draft": text_input
+        }
 
+        # get the response
+        groq_api_key = st.secrets["groq_api_key"]
+        response = write_post(user_inputs, groq_api_key)
+        
+        # display the response
+        st.text_area("Your Post:", value=response, height=number_of_words*2)
 
-# generate output
-user_inputs = {
-    "social_media": social_media,
-    "number_of_words": number_of_words,
-    "tone": tone,
-    "on_topic": title
-}
-
-groq_api_key = st.secrets['groq_api_key']
-response = write_post(user_inputs, groq_api_key)
-
-st.text_area("Your Post:", value=response)
+        # copy to clipboard
+        if st.button("copy to clipboard"):
+            copy(response)

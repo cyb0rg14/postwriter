@@ -1,6 +1,6 @@
 # page configuration variables
 page_title = "Post Writer"
-favicon = ""
+favicon = "./assets/postwriter-cc.png"
 menu_items = {
     "About": "https://github.com/cyb0rg14/PostWriter",
     "Report a bug": "https://github.com/cyb0rg14/PostWriter/issues",
@@ -17,8 +17,8 @@ social_medias = ["Twitter", "LinkedIn", "Reddit", "Instagram", "Other"]
 tones = ['Professional', 'Friendly', 'Conversational', 'Humurous', 'Educational', 'Inspirational', 'Authentic']
 
 templates = [
-    "Start with a title (just write the topic, you are interested to post about!)",
-    "Have a draft? (customize it and make your post more engaging and informative!)"
+    "I would like to have a new post about given topic!",
+    "I would like to customize my draft!",
 ]
 
 title_template= "ex: Reinforcement Learning 101"
