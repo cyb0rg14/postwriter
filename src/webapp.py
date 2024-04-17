@@ -1,4 +1,5 @@
 # import all the required packages
+import time
 import streamlit as st
 from pyperclip import copy
 from sidebar import sidebar_conf
@@ -73,6 +74,10 @@ if 'topic' in template:
         # copy to clipboard
         if st.button("copy to clipboard"):
             copy(response)
+            success_placeholder = st.empty()
+            success_placeholder.success("Post copied to clipboard successfully!")
+            time.sleep(2)  # Display the success message for 2 seconds
+            success_placeholder.empty()  # Clear the success message
 
 elif 'draft' in template: 
     text_input = st.text_area("Enter the draft to customize:", placeholder=draft_template)
@@ -86,11 +91,24 @@ elif 'draft' in template:
 
         # get the response
         groq_api_key = st.secrets["groq_api_key"]
-        response = write_post(user_inputs, groq_api_key)
         
         # display the response
-        st.text_area("Your Post:", value=response, height=number_of_words*2)
+        height = max(200, number_of_words*2)
+
+        # Store response persistently using st.cache_resource
+        @st.cache_resource
+        def get_response(user_inputs):
+            response = write_post(user_inputs, groq_api_key)
+            return response
+
+        response = get_response(user_inputs)
+        st.text_area("Your Post:", value=response, height=height)
 
         # copy to clipboard
         if st.button("copy to clipboard"):
             copy(response)
+            success_placeholder = st.empty()
+            success_placeholder.success("Post copied to clipboard successfully!")
+            time.sleep(2)  # Display the success message for 2 seconds
+            success_placeholder.empty()  # Clear the success message
+
